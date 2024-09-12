@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="vh-100" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong text-center" style="border-radius: 1rem;">
+            <div class="card-body p-5">
+              <h3 class="mb-4">Welcome!</h3>
+              <!-- Button Group -->
+              {% if request.user.is_authenticated %}
+                <!-- Logout Form -->
+                <form action="{% url 'logout' %}" method="post">
+                  {% csrf_token %}
+                  <div class="d-flex flex-column align-items-center">
+                    <!-- Change Password Button -->
+                    <a class="btn btn-warning btn-lg mb-3 w-100"
+                       href="{% url 'password_change' %}"
+                       role="button">Change Password</a>
+                    <!-- Logout Button -->
+                    <button type="submit" class="btn btn-primary btn-lg mb-3 w-100">Logout</button>
+                  </div>
+                </form>
+              {% else %}
+                <div class="d-flex flex-column align-items-center">
+                  <!-- Login Button -->
+                  <a class="btn btn-primary btn-lg mb-3 w-100"
+                     href="{% url 'login' %}"
+                     role="button">Login</a>
+                  <!-- Signup Button -->
+                  <a class="btn btn-secondary btn-lg w-100"
+                     href="{% url 'signup' %}"
+                     role="button">Signup</a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}
